@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SiGaji Employee Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#2c5000",
+                    "inverse-surface": "#213145",
+                    "on-primary-fixed-variant": "#294e41",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "primary-container": "#062e23",
+                    "on-secondary": "#ffffff",
+                    "surface-bg": "#F8FAFC",
+                    "status-warning": "#F59E0B",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed": "#aaf859",
+                    "on-background": "#0b1c30",
+                    "tertiary-fixed-dim": "#bdcac1",
+                    "tertiary-container": "#1f2a25",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#a7cfbf",
+                    "primary": "#001810",
+                    "on-tertiary-container": "#85928a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#eff4ff",
+                    "surface-tint": "#416658",
+                    "outline": "#717975",
+                    "surface": "#f8f9ff",
+                    "outline-variant": "#c1c8c3",
+                    "surface-variant": "#d3e4fe",
+                    "surface-dim": "#cbdbf5",
+                    "secondary": "#3c6a00",
+                    "secondary-container": "#aaf859",
+                    "status-success": "#10B981",
+                    "surface-container-high": "#dce9ff",
+                    "tertiary-fixed": "#d9e6dd",
+                    "on-tertiary-fixed": "#131e19",
+                    "border-muted": "#E2E8F0",
+                    "surface-container": "#e5eeff",
+                    "on-secondary-fixed": "#0e2000",
+                    "on-secondary-container": "#407100",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-surface-variant": "#414845",
+                    "inverse-primary": "#a7cfbf",
+                    "on-primary-container": "#719788",
+                    "status-error": "#EF4444",
+                    "tertiary": "#0a1510",
+                    "background": "#f8f9ff",
+                    "secondary-fixed-dim": "#90db3f",
+                    "on-primary-fixed": "#002117",
+                    "primary-fixed": "#c3ebda",
+                    "on-surface": "#0b1c30",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#3e4943"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "table-cell-px": "16px",
+                    "stack-sm": "8px",
+                    "gutter": "16px",
+                    "container-margin": "24px",
+                    "base": "4px",
+                    "table-cell-py": "12px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "mono-data": ["Hanken Grotesk"],
+                    "body-sm": ["Hanken Grotesk"],
+                    "label-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "body-md": ["Hanken Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "display-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #F8FAFC; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            color: #aaf859 !important;
+            font-weight: 700 !important;
+            border-right: 4px solid #aaf859;
+            background-color: #294e41;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar (Context: Employee Dashboard) -->
+<aside class="w-64 h-full fixed left-0 top-0 bg-primary-container flex flex-col py-stack-lg z-50">
+<div class="px-6 mb-stack-lg">
+<h1 class="font-headline-md text-headline-md text-secondary-fixed font-bold tracking-tight">SiGaji</h1>
+<p class="font-label-md text-label-md text-on-primary-container opacity-80 uppercase tracking-widest">Employee Panel</p>
+</div>
+<nav class="flex-1 flex flex-col">
+<!-- Dashboard Active -->
+<a class="flex items-center px-6 py-4 transition-colors duration-200 active-tab" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center px-6 py-4 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">receipt_long</span>
+<span class="font-label-md text-label-md">Slip Gaji Saya</span>
+</a>
+<a class="flex items-center px-6 py-4 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">person</span>
+<span class="font-label-md text-label-md">Profil</span>
+</a>
+<div class="mt-auto pt-6 border-t border-primary/20">
+<a class="flex items-center px-6 py-4 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span class="font-label-md text-label-md">Keluar</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- TopAppBar -->
+<header class="flex justify-between items-center ml-64 px-container-margin h-16 w-[calc(100%-16rem)] sticky top-0 bg-surface-container-lowest border-b border-border-muted z-40">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Employee Panel</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-opacity active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-opacity active:opacity-80">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-border-muted">
+<div class="text-right hidden sm:block">
+<p class="font-label-md text-label-md text-primary">Budi Pratama</p>
+<p class="text-[11px] text-on-surface-variant leading-none uppercase">Senior Manager</p>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-secondary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged Indonesian businessman wearing a modern batik shirt, smiling confidently. The lighting is soft and natural, against a minimalist corporate office background with deep green and neutral grey tones. The high-quality photograph reflects a sense of trust and established authority within a corporate setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpp-_rUgg8_6tKVCI6HG6j8XH8lqe582Ik5M6pPzrZgzTAw1ZMs4-zHihtWtClmAyGv-ZF1uEfoSJssg2UiPhBZtQb1U6UNJkcTGlsDiYartTYZkqfHS6iENj3VDhe8rEfZhMLpquhPiBcAhpGEl5KU5FRUuBbrNqRegvsDe1Osp9dn099QsSkhOe2kGLvyLIO4j-aRyId0iVHfeOE8stwnPa1RABMwxqSYvfGlwSvNpu6wiqga2ox5JpPoTSanCfgi-9hxR_3O7o"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 p-container-margin min-h-[calc(100vh-64px)]">
+<div class="max-w-[1280px] mx-auto space-y-stack-lg">
+<!-- Welcome Banner -->
+<section class="relative overflow-hidden bg-primary-container rounded-xl p-stack-lg text-white">
+
+<div class="relative z-10">
+<h3 class="font-display-lg text-display-lg text-secondary-fixed mb-2">Selamat Datang, Budi Pratama</h3>
+<p class="font-body-lg text-body-lg text-primary-fixed max-w-2xl">Ringkasan pendapatan dan status administratif Anda untuk bulan Juni 2026 sudah tersedia di bawah ini.</p>
+</div>
+</section>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Last Salary -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-border-muted shadow-sm group hover:border-secondary transition-colors duration-300">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-2 rounded-lg">payments</span>
+<span class="text-status-success font-label-md text-label-md">Selesai</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Gaji Terakhir (Juni 2026)</p>
+<p class="font-headline-lg text-headline-lg text-primary mt-1">Rp 18.250.000</p>
+</div>
+<!-- Annual Total -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-border-muted shadow-sm group hover:border-secondary transition-colors duration-300">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-2 rounded-lg">analytics</span>
+<span class="text-on-surface-variant font-mono-data text-body-sm">YTD 2026</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Gaji Tahun Ini</p>
+<p class="font-headline-lg text-headline-lg text-primary mt-1">Rp 109.500.000</p>
+</div>
+<!-- Leave Balance -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-border-muted shadow-sm group hover:border-secondary transition-colors duration-300">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-2 rounded-lg">event_available</span>
+<span class="text-status-warning font-label-md text-label-md">Digunakan: 4</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Sisa Cuti Tahunan</p>
+<div class="flex items-baseline gap-2">
+<p class="font-headline-lg text-headline-lg text-primary mt-1">8</p>
+<span class="text-on-surface-variant font-body-sm">Hari Tersisa</span>
+</div>
+</div>
+</div>
+<!-- Dashboard Body: Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Recent Payslips (2/3 width) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl border border-border-muted overflow-hidden flex flex-col shadow-sm">
+<div class="p-stack-md border-b border-border-muted flex justify-between items-center bg-surface-bg/50">
+<h4 class="font-headline-md text-headline-md text-primary">Slip Gaji Terakhir</h4>
+<button class="text-primary hover:text-secondary font-label-md text-label-md flex items-center gap-1">
+                            Lihat Semua <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-bg">
+<tr>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Periode</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Gaji Bersih</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase text-center">Status</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-muted">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-table-cell-px py-table-cell-py font-body-md">Juni 2026</td>
+<td class="px-table-cell-px py-table-cell-py font-mono-data">Rp 18.250.000</td>
+<td class="px-table-cell-px py-table-cell-py text-center">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[11px] font-bold rounded-full uppercase">Selesai</span>
+</td>
+<td class="px-table-cell-px py-table-cell-py text-right">
+<button class="p-2 text-primary hover:bg-secondary-container rounded-lg transition-colors" title="Unduh PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-table-cell-px py-table-cell-py font-body-md">Mei 2026</td>
+<td class="px-table-cell-px py-table-cell-py font-mono-data">Rp 18.250.000</td>
+<td class="px-table-cell-px py-table-cell-py text-center">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[11px] font-bold rounded-full uppercase">Selesai</span>
+</td>
+<td class="px-table-cell-px py-table-cell-py text-right">
+<button class="p-2 text-primary hover:bg-secondary-container rounded-lg transition-colors" title="Unduh PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-table-cell-px py-table-cell-py font-body-md">April 2026</td>
+<td class="px-table-cell-px py-table-cell-py font-mono-data">Rp 18.250.000</td>
+<td class="px-table-cell-px py-table-cell-py text-center">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[11px] font-bold rounded-full uppercase">Selesai</span>
+</td>
+<td class="px-table-cell-px py-table-cell-py text-right">
+<button class="p-2 text-primary hover:bg-secondary-container rounded-lg transition-colors" title="Unduh PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-table-cell-px py-table-cell-py font-body-md">Maret 2026</td>
+<td class="px-table-cell-px py-table-cell-py font-mono-data">Rp 18.250.000</td>
+<td class="px-table-cell-px py-table-cell-py text-center">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[11px] font-bold rounded-full uppercase">Selesai</span>
+</td>
+<td class="px-table-cell-px py-table-cell-py text-right">
+<button class="p-2 text-primary hover:bg-secondary-container rounded-lg transition-colors" title="Unduh PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Profile & Info Sidebar -->
+<div class="space-y-gutter">
+<!-- Profile Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-muted p-stack-md shadow-sm relative overflow-hidden">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-secondary-container/20 rounded-full blur-2xl"></div>
+<h4 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4 border-b border-border-muted pb-2">Profil Karyawan</h4>
+<div class="space-y-4">
+<div>
+<p class="text-[11px] text-on-surface-variant font-bold uppercase tracking-tight">NIP</p>
+<p class="font-mono-data text-body-md text-primary">SG-2026-0042</p>
+</div>
+<div>
+<p class="text-[11px] text-on-surface-variant font-bold uppercase tracking-tight">Jabatan</p>
+<p class="font-body-md text-primary">Senior Manager</p>
+</div>
+<div>
+<p class="text-[11px] text-on-surface-variant font-bold uppercase tracking-tight">Departemen</p>
+<p class="font-body-md text-primary">Operations &amp; Strategy</p>
+</div>
+<div>
+<p class="text-[11px] text-on-surface-variant font-bold uppercase tracking-tight">Join Date</p>
+<p class="font-body-md text-primary">12 Januari 2022</p>
+</div>
+<button class="w-full mt-4 bg-primary text-secondary-fixed py-2 rounded-lg font-label-md hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit</span>
+                                Perbarui Profil
+                            </button>
+</div>
+</div>
+<!-- Tax Info Card -->
+<div class="bg-surface-container-low rounded-xl border border-border-muted p-stack-md">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<p class="font-label-md text-label-md text-primary">Verifikasi Pajak</p>
+</div>
+<p class="text-body-sm text-on-surface-variant">NPWP Anda telah terverifikasi untuk pelaporan SPT tahunan 2025.</p>
+<a class="mt-3 inline-block text-primary underline font-label-md text-[12px]" href="#">Lihat Detail Pajak</a>
+</div>
+</div>
+</div>
+<!-- Quick Actions Section -->
+<section class="mt-stack-lg">
+<h4 class="font-headline-md text-headline-md text-primary mb-4">Aksi Cepat</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-gutter">
+<button class="flex flex-col items-center justify-center p-stack-md bg-surface-container-lowest border border-border-muted rounded-xl hover:bg-secondary-container/10 hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-3xl text-primary mb-2">description</span>
+<span class="font-label-md text-[12px] text-center">Ajukan Cuti</span>
+</button>
+<button class="flex flex-col items-center justify-center p-stack-md bg-surface-container-lowest border border-border-muted rounded-xl hover:bg-secondary-container/10 hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-3xl text-primary mb-2">request_quote</span>
+<span class="font-label-md text-[12px] text-center">Klaim Reimburse</span>
+</button>
+<button class="flex flex-col items-center justify-center p-stack-md bg-surface-container-lowest border border-border-muted rounded-xl hover:bg-secondary-container/10 hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-3xl text-primary mb-2">contact_support</span>
+<span class="font-label-md text-[12px] text-center">Lapor HR</span>
+</button>
+<button class="flex flex-col items-center justify-center p-stack-md bg-surface-container-lowest border border-border-muted rounded-xl hover:bg-secondary-container/10 hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-3xl text-primary mb-2">history</span>
+<span class="font-label-md text-[12px] text-center">Riwayat Absensi</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Interactive Layer for Hover Effects -->
+<script>
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.classList.add('scale-95');
+                el.style.transition = 'transform 0.1s';
+            });
+            el.addEventListener('mouseup', () => {
+                el.classList.remove('scale-95');
+            });
+            el.addEventListener('mouseleave', () => {
+                el.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

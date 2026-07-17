@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SiGaji Admin - Tambah Karyawan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#3c6a00",
+                        "outline-variant": "#c1c8c3",
+                        "outline": "#717975",
+                        "tertiary-container": "#1f2a25",
+                        "surface-dim": "#cbdbf5",
+                        "on-secondary-fixed-variant": "#2c5000",
+                        "on-primary-fixed-variant": "#294e41",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#85928a",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#a7cfbf",
+                        "surface-bg": "#F8FAFC",
+                        "surface-variant": "#d3e4fe",
+                        "border-muted": "#E2E8F0",
+                        "background": "#f8f9ff",
+                        "on-surface": "#0b1c30",
+                        "status-warning": "#F59E0B",
+                        "tertiary-fixed-dim": "#bdcac1",
+                        "on-secondary-fixed": "#0e2000",
+                        "tertiary": "#0a1510",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#062e23",
+                        "on-tertiary-fixed-variant": "#3e4943",
+                        "secondary-container": "#aaf859",
+                        "on-surface-variant": "#414845",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#213145",
+                        "on-primary-fixed": "#002117",
+                        "surface": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed-dim": "#90db3f",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#416658",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed": "#131e19",
+                        "secondary-fixed": "#aaf859",
+                        "surface-container": "#e5eeff",
+                        "primary-fixed-dim": "#a7cfbf",
+                        "tertiary-fixed": "#d9e6dd",
+                        "primary": "#001810",
+                        "on-primary-container": "#719788",
+                        "status-success": "#10B981",
+                        "primary-fixed": "#c3ebda",
+                        "on-secondary-container": "#407100",
+                        "status-error": "#EF4444"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "table-cell-px": "16px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "container-margin": "24px",
+                        "base": "4px",
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "table-cell-py": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Manrope"],
+                        "mono-data": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #F8FAFC; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Sidebar (As per JSON) -->
+<aside class="w-64 h-full fixed left-0 top-0 bg-primary flex flex-col py-stack-lg z-10">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md text-secondary-fixed font-bold leading-tight">SiGaji Admin</h1>
+<p class="text-tertiary-fixed-dim text-xs opacity-70">Payroll System</p>
+</div>
+<nav class="flex-1 flex flex-col">
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-6 py-3 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-secondary-fixed font-bold border-r-4 border-secondary-fixed bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-label-md text-label-md">Karyawan</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md">Payroll</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-label-md text-label-md">Laporan</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-1">
+<a class="flex items-center gap-3 px-6 py-3 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Pengaturan</span>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 text-tertiary-fixed-dim hover:text-secondary-fixed-dim hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Keluar</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Top App Bar (As per JSON) -->
+<header class="flex justify-between items-center ml-64 px-container-margin h-16 w-[calc(100%-16rem)] bg-surface-container-lowest sticky top-0 border-b border-border-muted z-20">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm w-80 focus:ring-2 focus:ring-secondary/20" placeholder="Cari data karyawan..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-opacity">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="flex items-center gap-3 ml-4 pl-4 border-l border-border-muted">
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface leading-none">Admin HRD</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Super Admin</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-xl" data-icon="person">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content (Daftar Karyawan Screen) -->
+<main class="ml-64 p-container-margin min-h-[calc(100vh-4rem)] blur-[2px]">
+<div class="max-w-[1280px] mx-auto">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Daftar Karyawan</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Kelola basis data karyawan aktif dan kontrak.</p>
+</div>
+<button class="bg-secondary text-white px-6 py-2.5 rounded-lg flex items-center gap-2 font-label-md text-label-md hover:bg-secondary/90 transition-all shadow-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Tambah Karyawan
+                </button>
+</div>
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8">
+<div class="bg-surface-container-lowest p-stack-md border border-border-muted rounded-xl">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-1">Total Karyawan</p>
+<p class="font-headline-md text-headline-md text-primary">1,248</p>
+<div class="flex items-center gap-1 mt-2 text-status-success">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span class="text-xs font-bold">+12 Bulan ini</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-stack-md border border-border-muted rounded-xl">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-1">Karyawan Tetap</p>
+<p class="font-headline-md text-headline-md text-primary">892</p>
+<div class="w-full bg-surface-container mt-3 h-1.5 rounded-full">
+<div class="bg-secondary w-[72%] h-full rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-stack-md border border-border-muted rounded-xl">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-1">Karyawan Kontrak</p>
+<p class="font-headline-md text-headline-md text-primary">356</p>
+<div class="w-full bg-surface-container mt-3 h-1.5 rounded-full">
+<div class="bg-secondary-fixed-dim w-[28%] h-full rounded-full"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-stack-md border border-border-muted rounded-xl">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-1">Baru Bergabung</p>
+<p class="font-headline-md text-headline-md text-primary">4</p>
+<div class="flex items-center -space-x-2 mt-3">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-300"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-slate-400"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-secondary flex items-center justify-center text-[8px] text-white">+1</div>
+</div>
+</div>
+</div>
+<!-- Fake Data Table for background context -->
+<div class="bg-surface-container-lowest border border-border-muted rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-bg border-b border-border-muted">
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">NIP</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Nama Lengkap</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Jabatan</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Status</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Gaji Pokok</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-muted">
+<tr class="hover:bg-tertiary-fixed/10">
+<td class="px-table-cell-px py-table-cell-py font-mono-data text-body-sm text-on-surface-variant">202401001</td>
+<td class="px-table-cell-px py-table-cell-py font-body-sm text-primary font-semibold">Ahmad Subarjo</td>
+<td class="px-table-cell-px py-table-cell-py font-body-sm">Senior Developer</td>
+<td class="px-table-cell-px py-table-cell-py">
+<span class="bg-tertiary-fixed text-secondary px-2 py-0.5 rounded text-[10px] font-bold uppercase">Tetap</span>
+</td>
+<td class="px-table-cell-px py-table-cell-py font-mono-data">Rp 12.500.000</td>
+<td class="px-table-cell-px py-table-cell-py text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-tertiary-fixed/10">
+<td class="px-table-cell-px py-table-cell-py font-mono-data text-body-sm text-on-surface-variant">202401002</td>
+<td class="px-table-cell-px py-table-cell-py font-body-sm text-primary font-semibold">Siti Aminah</td>
+<td class="px-table-cell-px py-table-cell-py font-body-sm">HR Specialist</td>
+<td class="px-table-cell-px py-table-cell-py">
+<span class="bg-blue-50 text-blue-600 px-2 py-0.5 rounded text-[10px] font-bold uppercase">Kontrak</span>
+</td>
+<td class="px-table-cell-px py-table-cell-py font-mono-data">Rp 8.200.000</td>
+<td class="px-table-cell-px py-table-cell-py text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-tertiary-fixed/10">
+<td class="px-table-cell-px py-table-cell-py font-mono-data text-body-sm text-on-surface-variant">202401003</td>
+<td class="px-table-cell-px py-table-cell-py font-body-sm text-primary font-semibold">Budi Santoso</td>
+<td class="px-table-cell-px py-table-cell-py font-body-sm">DevOps Engineer</td>
+<td class="px-table-cell-px py-table-cell-py">
+<span class="bg-tertiary-fixed text-secondary px-2 py-0.5 rounded text-[10px] font-bold uppercase">Tetap</span>
+</td>
+<td class="px-table-cell-px py-table-cell-py font-mono-data">Rp 14.000.000</td>
+<td class="px-table-cell-px py-table-cell-py text-right">
+<button class="text-outline hover:text-primary"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-[50] flex items-center justify-center bg-primary/40 backdrop-blur-sm animate-[fadeIn_0.2s_ease-out]">
+<!-- Modal Content Container -->
+<div class="bg-surface-container-lowest w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[921px] animate-[slideUp_0.3s_ease-out]">
+<!-- Modal Header -->
+<div class="px-stack-lg py-6 border-b border-border-muted flex justify-between items-center bg-white sticky top-0">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Tambah Karyawan Baru</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lengkapi informasi dasar dan penggajian karyawan.</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-bg text-outline transition-colors" onclick="this.closest('.fixed').remove()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body (Form) -->
+<div class="px-stack-lg py-8 overflow-y-auto">
+<form class="space-y-6" id="addEmployeeForm">
+<!-- Section: Identitas -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="nip">NIP (Employee ID)</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-body-sm" id="nip" placeholder="Contoh: 202401010" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="nama">Nama Lengkap</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-body-sm" id="nama" placeholder="Masukkan nama lengkap" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="jabatan">Jabatan</label>
+<select class="w-full px-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-body-sm appearance-none bg-no-repeat bg-[right_1rem_center] bg-[length:1em_1em]" id="jabatan" style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23717975%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')">
+<option disabled="" selected="" value="">Pilih Jabatan</option>
+<option>Software Engineer</option>
+<option>Product Manager</option>
+<option>HR Generalist</option>
+<option>Accounting</option>
+<option>Office Support</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="tanggal_masuk">Tanggal Masuk</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-body-sm" id="tanggal_masuk" type="date"/>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="py-2 flex items-center gap-4">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest whitespace-nowrap">Detail Penggajian (Monthly)</span>
+<div class="h-[1px] bg-border-muted w-full"></div>
+</div>
+<!-- Section: Finance -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="gaji_pokok">Gaji Pokok</label>
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-xs">Rp</span>
+<input class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-mono-data group-focus-within:border-secondary" id="gaji_pokok" placeholder="0" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="potongan">Potongan</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-status-error font-bold text-xs">Rp</span>
+<input class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-mono-data" id="potongan" placeholder="0" type="number"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="tunjangan_1">Tunjangan 1 (Makan &amp; Transport)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-xs">Rp</span>
+<input class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-mono-data" id="tunjangan_1" placeholder="0" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="tunjangan_2">Tunjangan 2 (Lain-lain)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold text-xs">Rp</span>
+<input class="w-full pl-12 pr-4 py-2.5 rounded-lg border border-border-muted focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none font-mono-data" id="tunjangan_2" placeholder="0" type="number"/>
+</div>
+</div>
+</div>
+</form>
+</div>
+<!-- Modal Footer -->
+<div class="px-stack-lg py-6 border-t border-border-muted bg-surface-container-low flex justify-end items-center gap-3">
+<button class="px-6 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-dim transition-colors" onclick="this.closest('.fixed').remove()">
+                    Batal
+                </button>
+<button class="bg-secondary text-white px-8 py-2.5 rounded-lg font-label-md text-label-md hover:bg-on-secondary-fixed-variant shadow-lg shadow-secondary/20 flex items-center gap-2 active:scale-95 transition-transform" form="addEmployeeForm" type="submit">
+<span class="material-symbols-outlined text-lg" data-icon="save">save</span>
+                    Simpan Data
+                </button>
+</div>
+</div>
+</div>
+<!-- UI Overlay and Interactions Script -->
+<script>
+        // Micro-interactions and Modal Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('addEmployeeForm');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Simulate saving animation
+                const btn = e.target.closest('.fixed').querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Menyimpan...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    alert('Data Karyawan berhasil disimpan ke sistem SiGaji!');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    document.querySelector('.fixed').classList.add('opacity-0');
+                    setTimeout(() => {
+                        window.location.reload(); // Refresh to "show" new data in this static demo
+                    }, 300);
+                }, 1500);
+            });
+        });
+    </script>
+<style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</body></html>

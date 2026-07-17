@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.form-input-focus:focus {
+    outline: none;
+    border-color: #3c6a00;
+    box-shadow: 0 0 0 2px rgba(60, 106, 0, 0.2);
+}
+
+.bg-pattern {
+    background-color: #001810;
+    background-image: radial-gradient(#294e41 0.5px, transparent 0.5px);
+    background-size: 24px 24px;
+}
