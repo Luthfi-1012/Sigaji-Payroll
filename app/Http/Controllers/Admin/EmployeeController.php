@@ -98,7 +98,17 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         $employee = Employee::findOrFail($id);
-        $employee->user->delete(); // This will cascade delete employee due to foreign key setup
+        $user = $employee->user;
+
+        // Append timestamp to avoid unique constraint violations if re-registered
+        $user->email = $user->email . '::deleted_' . time();
+        $user->save();
+
+        $employee->nip = $employee->nip . '::deleted_' . time();
+        $employee->save();
+
+        $user->delete();
+        $employee->delete();
 
         return redirect()->route('admin.karyawan')->with('success', 'Karyawan dihapus');
     }

@@ -19,11 +19,14 @@ class DashboardController extends Controller
         $karyawanBaru = Employee::whereMonth('tanggal_masuk', Carbon::now()->month)
             ->whereYear('tanggal_masuk', Carbon::now()->year)
             ->count();
-        $totalPayroll = Payroll::whereMonth('created_at', Carbon::now()->month)
-            ->whereYear('created_at', Carbon::now()->year)
+        $currentMonth = str_pad(Carbon::now()->month, 2, '0', STR_PAD_LEFT);
+        $currentYear = Carbon::now()->year;
+
+        $totalPayroll = Payroll::where('periode_bulan', $currentMonth)
+            ->where('periode_tahun', $currentYear)
             ->count();
-        $totalGajiDibayar = Payroll::whereMonth('created_at', Carbon::now()->month)
-            ->whereYear('created_at', Carbon::now()->year)
+        $totalGajiDibayar = Payroll::where('periode_bulan', $currentMonth)
+            ->where('periode_tahun', $currentYear)
             ->sum('gaji_bersih');
         $recentEmployees = Employee::with('user')->latest()->take(5)->get();
 

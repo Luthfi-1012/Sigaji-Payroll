@@ -65,4 +65,23 @@ class PayrollController extends Controller
         $payrolls = Payroll::with('employee')->orderBy('created_at', 'desc')->get();
         return view('admin.laporan-payroll', compact('payrolls'));
     }
+
+    /**
+     * Tandai payroll sebagai sudah dibayar.
+     */
+    public function tandaiDibayar($id)
+    {
+        $payroll = Payroll::findOrFail($id);
+
+        if ($payroll->isSudahDibayar()) {
+            return redirect()->back()->with('info', 'Payroll ini sudah berstatus "Sudah Dibayar".');
+        }
+
+        $payroll->update([
+            'status_pembayaran' => 'sudah_dibayar',
+            'dibayar_at' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Status pembayaran berhasil diperbarui.');
+    }
 }

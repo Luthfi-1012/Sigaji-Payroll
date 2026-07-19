@@ -88,6 +88,12 @@
     <span class="font-label-md">{{ session('success') }}</span>
 </div>
 @endif
+@if(session('info'))
+<div class="mb-4 p-4 bg-blue-50 border border-blue-200 text-blue-800 rounded-xl flex items-center gap-3">
+    <span class="material-symbols-outlined text-blue-600">info</span>
+    <span class="font-label-md">{{ session('info') }}</span>
+</div>
+@endif
 <!-- Summary Cards (Bento Style) -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
 <div class="bg-white p-6 rounded-xl border border-border-muted shadow-sm group hover:border-secondary transition-colors">
@@ -198,6 +204,7 @@
 <th class="px-table-cell-px py-table-cell-py text-label-md font-label-md text-primary uppercase">Tgl Diproses</th>
 <th class="px-table-cell-px py-table-cell-py text-label-md font-label-md text-primary uppercase">Total Biaya</th>
 <th class="px-table-cell-px py-table-cell-py text-label-md font-label-md text-primary uppercase">Status</th>
+<th class="px-table-cell-px py-table-cell-py text-label-md font-label-md text-primary uppercase">Status Pembayaran</th>
 <th class="px-table-cell-px py-table-cell-py text-label-md font-label-md text-primary uppercase text-right">Aksi</th>
 </tr>
 </thead>
@@ -210,6 +217,28 @@
 <td class="px-table-cell-px py-table-cell-py">
 <span class="px-2 py-1 bg-tertiary-fixed text-status-success text-[10px] font-bold rounded uppercase">{{ $payroll->status }}</span>
 </td>
+<td class="px-table-cell-px py-table-cell-py">
+@if($payroll->isSudahDibayar())
+    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-green-100 text-green-800 text-[10px] font-bold rounded-full uppercase">
+        <span class="material-symbols-outlined text-[14px]">check_circle</span>
+        Sudah Dibayar
+    </span>
+    <p class="text-[10px] text-on-surface-variant mt-1">{{ $payroll->dibayar_at->format('d M Y, H:i') }}</p>
+@else
+    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-100 text-amber-800 text-[10px] font-bold rounded-full uppercase">
+        <span class="material-symbols-outlined text-[14px]">schedule</span>
+        Belum Dibayar
+    </span>
+    <form action="{{ route('admin.payroll.tandai-dibayar', $payroll->id) }}" method="POST" class="inline mt-1" onsubmit="return confirm('Tandai payroll {{ $payroll->employee->nama }} periode {{ $payroll->periode_bulan }}/{{ $payroll->periode_tahun }} sebagai Sudah Dibayar?')">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="mt-1 px-2.5 py-1 bg-primary text-white text-[10px] font-bold rounded-full hover:bg-primary/80 transition-colors inline-flex items-center gap-1">
+            <span class="material-symbols-outlined text-[14px]">payments</span>
+            Tandai Sudah Dibayar
+        </button>
+    </form>
+@endif
+</td>
 <td class="px-table-cell-px py-table-cell-py text-right">
 <button class="p-2 hover:bg-white rounded border border-transparent hover:border-border-muted transition-all text-secondary">
 <span class="material-symbols-outlined">visibility</span>
@@ -218,7 +247,7 @@
 </tr>
 @empty
 <tr>
-<td colspan="5" class="px-table-cell-px py-table-cell-py text-center text-on-surface-variant">Belum ada data payroll</td>
+<td colspan="6" class="px-table-cell-px py-table-cell-py text-center text-on-surface-variant">Belum ada data payroll</td>
 </tr>
 @endforelse
 </tbody>
@@ -287,17 +316,6 @@
 </div>
 <span class="material-symbols-outlined text-[18px]">chevron_right</span>
 </button>
-</div>
-</div>
-<!-- Promo/Notice Card -->
-<div class="bg-surface-container-high p-6 rounded-xl border border-secondary-fixed/30">
-<div class="flex gap-4">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
-<div>
-<h5 class="font-bold text-primary">System Update</h5>
-<p class="text-sm text-on-surface-variant mt-1">Laporan pajak PPh 21 kini sudah tersedia untuk periode 2024. Periksa di menu Pengaturan.</p>
-<a class="text-xs font-bold text-primary mt-3 inline-block underline" href="#">Lihat Pembaruan</a>
-</div>
 </div>
 </div>
 </div>

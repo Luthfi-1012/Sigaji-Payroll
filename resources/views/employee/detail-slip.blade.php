@@ -160,10 +160,24 @@
 </div>
 </div>
 <!-- Summary Section -->
-<div class="mt-4 flex flex-col items-end gap-2 border-t-2 border-dashed border-border-muted pt-8">
+<div class="mt-4 flex flex-col items-end gap-4 border-t-2 border-dashed border-border-muted pt-8">
 <div class="flex items-center gap-8 bg-secondary-container/10 border-2 border-secondary-container px-10 py-6 rounded-2xl w-full md:w-auto">
 <span class="font-headline-md text-headline-md text-primary">Total Gaji Bersih</span>
 <span class="font-display-lg text-display-lg text-secondary">Rp {{ number_format($payroll->gaji_bersih, 0, ',', '.') }}</span>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto justify-end">
+<span class="font-label-md text-label-md text-on-surface-variant">Status Pembayaran:</span>
+@if($payroll->isSudahDibayar())
+    <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-green-100 text-green-800 text-[12px] font-bold rounded-full uppercase">
+        <span class="material-symbols-outlined text-[16px]">check_circle</span>
+        Sudah Dibayar — {{ $payroll->dibayar_at->format('d M Y, H:i') }}
+    </span>
+@else
+    <span class="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-100 text-amber-800 text-[12px] font-bold rounded-full uppercase">
+        <span class="material-symbols-outlined text-[16px]">schedule</span>
+        Belum Dibayar
+    </span>
+@endif
 </div>
 </div>
 <!-- Footer / Signature Area -->

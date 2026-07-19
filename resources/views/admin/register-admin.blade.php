@@ -171,6 +171,7 @@
                                             Admin
                                         </span>
                                         @if($admin->id !== Auth::id())
+                                            <button onclick="document.getElementById('reset-admin-{{$admin->id}}').classList.toggle('hidden')" class="p-1.5 hover:bg-surface-bg rounded-lg text-yellow-600 transition-colors opacity-0 group-hover:opacity-100" title="Reset Password"><span class="material-symbols-outlined text-[18px]">key</span></button>
                                             <span class="text-xs text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">
                                                 Terdaftar {{ $admin->created_at->diffForHumans() }}
                                             </span>
@@ -181,6 +182,20 @@
                                         @endif
                                     </div>
                                 </div>
+                                @if($admin->id !== Auth::id())
+                                <div id="reset-admin-{{$admin->id}}" class="hidden p-4 bg-yellow-50 rounded-b-xl border border-t-0 border-yellow-200 mb-3 -mt-3">
+                                    <form action="{{ route('admin.reset-password', $admin->id) }}" method="POST" onsubmit="return confirm('Yakin mereset kata sandi admin ini?')" class="flex items-end gap-4">
+                                        @csrf
+                                        <div class="flex-1 max-w-xs">
+                                            <label class="text-on-surface-variant text-xs block mb-1">Kata Sandi Baru</label>
+                                            <input type="password" name="new_password" required minlength="8" class="w-full px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-yellow-400/20 focus:border-yellow-400 outline-none" placeholder="Minimal 8 karakter">
+                                        </div>
+                                        <button type="submit" class="bg-yellow-500 text-white px-4 py-1.5 rounded-lg font-label-md hover:brightness-110 active:scale-95 transition-all text-sm h-[34px]">
+                                            Reset Password
+                                        </button>
+                                    </form>
+                                </div>
+                                @endif
                             @empty
                                 <div class="text-center py-8 text-on-surface-variant">
                                     <span class="material-symbols-outlined text-[48px] opacity-30">person_off</span>

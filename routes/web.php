@@ -39,6 +39,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     
     Route::get('/payroll', [PayrollController::class, 'index'])->name('payroll');
     Route::post('/payroll/generate', [PayrollController::class, 'generate'])->name('payroll.generate');
+    Route::patch('/payroll/{id}/tandai-dibayar', [PayrollController::class, 'tandaiDibayar'])->name('payroll.tandai-dibayar');
     Route::get('/laporan', [PayrollController::class, 'report'])->name('laporan');
 
     // Admin User Management

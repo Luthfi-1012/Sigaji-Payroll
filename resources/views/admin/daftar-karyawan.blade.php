@@ -176,6 +176,7 @@
 <div class="flex items-center justify-end gap-base opacity-0 group-hover:opacity-100 transition-opacity">
 <button onclick="toggleDetail({{ $employee->id }})" class="p-1.5 hover:bg-surface-container rounded-lg text-primary transition-colors" title="Lihat Detail"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
 <button onclick="toggleEdit({{ $employee->id }})" class="p-1.5 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" title="Edit"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button onclick="toggleResetPassword({{ $employee->id }})" class="p-1.5 hover:bg-surface-container rounded-lg text-status-warning transition-colors" title="Reset Password"><span class="material-symbols-outlined text-[20px]">key</span></button>
 <form action="{{ route('admin.karyawan.destroy', $employee->id) }}" method="POST" class="inline">
     @csrf
     @method('DELETE')
@@ -198,16 +199,31 @@
 <!-- Edit Row (hidden by default) -->
 <tr id="edit-{{ $employee->id }}" class="hidden bg-secondary/5">
 <td colspan="6" class="px-table-cell-px py-4">
-    <form action="{{ route('admin.karyawan.update', $employee->id) }}" method="POST" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+    <form action="{{ route('admin.karyawan.update', $employee->id) }}" method="POST" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 text-sm">
         @csrf
         @method('PUT')
-        <div><label class="text-on-surface-variant">Nama</label><input name="nama" value="{{ $employee->nama }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
-        <div><label class="text-on-surface-variant">Jabatan</label><input name="jabatan" value="{{ $employee->jabatan }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
-        <div><label class="text-on-surface-variant">Gaji Pokok</label><input name="gaji_pokok" type="number" value="{{ $employee->gaji_pokok }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
-        <div class="flex items-end"><button type="submit" class="bg-secondary text-white px-4 py-1.5 rounded-lg font-label-md hover:brightness-110 active:scale-95 transition-all text-sm">Simpan</button></div>
-        <input type="hidden" name="tunjangan_1" value="{{ $employee->tunjangan_1 }}">
-        <input type="hidden" name="tunjangan_2" value="{{ $employee->tunjangan_2 }}">
-        <input type="hidden" name="potongan" value="{{ $employee->potongan }}">
+        <div class="col-span-2 md:col-span-1"><label class="text-on-surface-variant">Nama</label><input name="nama" value="{{ $employee->nama }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
+        <div class="col-span-2 md:col-span-1"><label class="text-on-surface-variant">Jabatan</label><input name="jabatan" value="{{ $employee->jabatan }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
+        <div class="col-span-2 md:col-span-1"><label class="text-on-surface-variant">Gaji Pokok</label><input name="gaji_pokok" type="number" value="{{ $employee->gaji_pokok }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
+        <div class="col-span-2 md:col-span-1"><label class="text-on-surface-variant">Tunjangan 1</label><input name="tunjangan_1" type="number" value="{{ $employee->tunjangan_1 }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
+        <div class="col-span-2 md:col-span-1"><label class="text-on-surface-variant">Tunjangan 2</label><input name="tunjangan_2" type="number" value="{{ $employee->tunjangan_2 }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
+        <div class="col-span-2 md:col-span-1"><label class="text-on-surface-variant">Potongan</label><input name="potongan" type="number" value="{{ $employee->potongan }}" class="w-full mt-1 px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none"></div>
+        <div class="col-span-2 md:col-span-1 flex items-end"><button type="submit" class="w-full bg-secondary text-white px-4 py-1.5 rounded-lg font-label-md hover:brightness-110 active:scale-95 transition-all text-sm h-[34px]">Simpan</button></div>
+    </form>
+</td>
+</tr>
+<!-- Reset Password Row (hidden by default) -->
+<tr id="reset-{{ $employee->id }}" class="hidden bg-status-warning/5">
+<td colspan="6" class="px-table-cell-px py-4">
+    <form action="{{ route('admin.reset-password', $employee->user_id) }}" method="POST" onsubmit="return confirm('Yakin ingin mereset password akun ini?')" class="flex items-end gap-4">
+        @csrf
+        <div class="flex-1 max-w-xs">
+            <label class="text-on-surface-variant text-sm block mb-1">Kata Sandi Baru</label>
+            <input type="password" name="new_password" required minlength="8" class="w-full px-3 py-1.5 rounded-lg border border-border-muted text-sm focus:ring-2 focus:ring-status-warning/20 focus:border-status-warning outline-none" placeholder="Minimal 8 karakter">
+        </div>
+        <button type="submit" class="bg-status-warning text-white px-4 py-1.5 rounded-lg font-label-md hover:brightness-110 active:scale-95 transition-all text-sm h-[34px]">
+            Reset Password
+        </button>
     </form>
 </td>
 </tr>
@@ -247,15 +263,28 @@
     function toggleDetail(id) {
         const detailRow = document.getElementById('detail-' + id);
         const editRow = document.getElementById('edit-' + id);
+        const resetRow = document.getElementById('reset-' + id);
         if (editRow) editRow.classList.add('hidden');
+        if (resetRow) resetRow.classList.add('hidden');
         if (detailRow) detailRow.classList.toggle('hidden');
     }
 
     function toggleEdit(id) {
         const editRow = document.getElementById('edit-' + id);
         const detailRow = document.getElementById('detail-' + id);
+        const resetRow = document.getElementById('reset-' + id);
         if (detailRow) detailRow.classList.add('hidden');
+        if (resetRow) resetRow.classList.add('hidden');
         if (editRow) editRow.classList.toggle('hidden');
+    }
+
+    function toggleResetPassword(id) {
+        const resetRow = document.getElementById('reset-' + id);
+        const editRow = document.getElementById('edit-' + id);
+        const detailRow = document.getElementById('detail-' + id);
+        if (detailRow) detailRow.classList.add('hidden');
+        if (editRow) editRow.classList.add('hidden');
+        if (resetRow) resetRow.classList.toggle('hidden');
     }
 
     // Auto-dismiss flash message after 5 seconds

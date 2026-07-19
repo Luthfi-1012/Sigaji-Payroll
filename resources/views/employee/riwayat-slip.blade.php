@@ -92,7 +92,7 @@
 </div>
 <p class="font-label-md text-label-md text-on-surface-variant">Total Potongan (YTD {{ date('Y') }})</p>
 <h3 class="font-headline-lg text-headline-lg text-status-error mt-base">Rp {{ number_format(auth()->user()->employee->payrolls()->where('periode_tahun', date('Y'))->sum('total_potongan'), 0, ',', '.') }}</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-4">Termasuk PPh21, BPJS, &amp; Asuransi</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-4">Total deduksi tahun ini</p>
 </div>
 </div>
 <!-- Main Data Table Container -->
@@ -115,6 +115,7 @@
 <th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Potongan</th>
 <th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Gaji Bersih</th>
 <th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Status</th>
+<th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase">Status Pembayaran</th>
 <th class="px-table-cell-px py-table-cell-py font-label-md text-label-md text-primary uppercase text-right">Aksi</th>
 </tr>
 </thead>
@@ -130,6 +131,19 @@
 <td class="px-table-cell-px py-table-cell-py">
 <span class="bg-tertiary-fixed text-status-success text-[12px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">{{ $payroll->status }}</span>
 </td>
+<td class="px-table-cell-px py-table-cell-py">
+@if($payroll->isSudahDibayar())
+    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-green-100 text-green-800 text-[11px] font-bold rounded-full uppercase">
+        <span class="material-symbols-outlined text-[14px]">check_circle</span>
+        Sudah Dibayar
+    </span>
+@else
+    <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-100 text-amber-800 text-[11px] font-bold rounded-full uppercase">
+        <span class="material-symbols-outlined text-[14px]">schedule</span>
+        Belum Dibayar
+    </span>
+@endif
+</td>
 <td class="px-table-cell-px py-table-cell-py text-right">
 <a class="text-secondary font-label-md hover:underline flex items-center justify-end gap-1" href="{{ route('employee.detail-slip', $payroll->id) }}">
                                         Lihat Detail
@@ -139,7 +153,7 @@
 </tr>
 @empty
 <tr>
-<td colspan="8" class="px-table-cell-px py-table-cell-py text-center text-on-surface-variant">Belum ada slip gaji</td>
+<td colspan="9" class="px-table-cell-px py-table-cell-py text-center text-on-surface-variant">Belum ada slip gaji</td>
 </tr>
 @endforelse
 </tbody>
